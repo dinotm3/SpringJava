@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="fragments :: head" ></head>
+<body>
+    <div class="container-lg">
+        <div th:replace="fragments :: header"></div>
+        <div>
+            Name: <span th:text="${transaction.name}"></span>
+            Amount: <span th:text="${transaction.amount}"></span>
+            Country: <span th:text="${transaction.country}"></span>
+            Type: <span th:text="${transaction.type}"></span>
+            Rate: <span th:text="${transaction.exchangeRate}"></span>
+            AmountHRK: <span th:text="${transaction.amountHRK}"></span>
+        </div>
+        <div>
+            <a th:href="@{/transaction/new}">Make new transaction</a>
+        </div>
+    </div>
+    <div th:replace="fragments :: js"></div>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</body>
+</html>

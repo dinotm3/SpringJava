@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+<body>
+
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title>Devize</title>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/logo.png}"  />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+</head>
+
+<div th:fragment="header" id="logo" >
+    <img th:src="@{/images/logo.png}" />
+    <meta charset="UTF-8"/>
+    <h1 th:text="#{msg.appName}"></h1>
+    <div>
+    <span th:text="#{msg.lang.current}"></span>:
+    <select id="locales">
+        <option value="hr" th:selected="${#locale.language == 'hr'}" th:text="#{msg.lang.hr}"></option>
+        <option value="en" th:selected="${#locale.language == 'en'}" th:text="#{msg.lang.en}"></option>
+    </select>
+    </div>
+</div>
+
+<div th:fragment="js" >
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Downloaded from https://code.jquery.com/jquery-3.6.0.slim.min.js -->
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</div>
+</body>
+</html>

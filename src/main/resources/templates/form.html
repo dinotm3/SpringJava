@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+    <div class="container-lg">
+        <div th:replace="fragments :: header"></div>
+        <h3 th:text='#{msg.newTransactionHeader}'> </h3>
+        <form method="post" th:object="${transaction}" th:action="@{/transaction/confirmed}" >
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="amount" th:text="#{msg.transaction.amount}"></label>
+                    <input id="amount" type="text" th:field="*{amount}" class="form-control"/>
+                    <span class="validation-error"
+                          th:if="${#fields.hasErrors('amount')}"
+                          th:errors="*{amount}">
+                    </span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="name" th:text="#{msg.transaction.name}"></label>
+                    <input id="name" type="text" th:field="*{name}" class="form-control" />
+                    <span class="validation-error"
+                          th:if="${#fields.hasErrors('name')}"
+                          th:errors="*{name}">
+                    </span>
+                </div>
+            </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="country" th:text="#{msg.transaction.country}"></label>
+                        <select id="country" th:field="*{country}" class="form-control">
+                            <option value="">----Choose country----</option>
+                            <option th:each="country : ${country}"
+                                    th:value="${country}"
+                                    th:text="${country}">
+                            </option>
+                        </select>
+                        <span class="validation-error"
+                              th:if="${#fields.hasErrors('country')}"
+                              th:errors="*{country}">
+                        </span>
+                    </div>
+                </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="type" th:text="#{msg.transaction.type}"></label>
+                    <select id="type" th:field="*{type}" class="form-control">
+                        <option value="">----Choose Type----</option>
+                        <option th:each="type : ${type}"
+                                th:value="${type}"
+                                th:text="${type}">
+                        </option>
+                    </select>
+                    <span class="validation-error"
+                          th:if="${#fields.hasErrors('type')}"
+                          th:errors="*{type}">
+                        </span>
+                </div>
+            </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <input type="submit" th:value="#{msg.newTransactionButton}" class="btn btn-primary" />
+                    </div>
+                </div>
+        </form>
+        <div sec:authorize=
+                     "isAuthenticated()">
+            <form method="POST" th:action="@{/logout}">
+                <span th:text="#{msg.userInfo}"></span>
+                <span sec:authentication="name">User</span>.
+                <input type="submit" value="Logout" class="btn btn-danger" />
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
